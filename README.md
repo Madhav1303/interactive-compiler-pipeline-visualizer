@@ -4,8 +4,7 @@ A browser-based tool that shows each phase of a compiler working on a program wr
 
 **Course:** Compiler Design, Review II
 **Team:** Madhav, Kishlay Anand, Atharv
-**Live demo:** https://github.com/Madhav1303/interactive-compiler-pipeline-visualize
-
+**Live demo:** https://madhav1303.github.io/interactive-compiler-pipeline-visualizer/
 ![App overview](screenshots/overview.png)
 
 ---
