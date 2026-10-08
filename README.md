@@ -115,15 +115,29 @@ primary    := NUMBER | IDENT | "(" expr ")"
 ---
 
 ## Example
-
 **Input**
 ```
-(paste a short program here)
+int sum = 0;
+for (int i = 0; i < 5; i = i + 1) {
+  sum = sum + i;
+}
+print(sum);
 ```
 
 **Three-address code**
 ```
-(paste the output here)
+sum = 0
+i = 0
+L1:
+t1 = i < 5
+ifFalse t1 goto L2
+t2 = sum + i
+sum = t2
+t3 = i + 1
+i = t3
+goto L1
+L2:
+print sum
 ```
 
 | Phase | Screenshot |
