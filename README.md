@@ -117,27 +117,29 @@ primary    := NUMBER | IDENT | "(" expr ")"
 ## Example
 **Input**
 ```
-int sum = 0;
-for (int i = 0; i < 5; i = i + 1) {
-  sum = sum + i;
+int a = 5;
+int b = 10;
+int sum = a + b;
+if (sum > 10) {
+  print(sum);
+} else {
+  print(a);
 }
-print(sum);
 ```
 
 **Three-address code**
 ```
-sum = 0
-i = 0
-L1:
-t1 = i < 5
-ifFalse t1 goto L2
-t2 = sum + i
-sum = t2
-t3 = i + 1
-i = t3
-goto L1
-L2:
+a = 5
+b = 10
+t1 = a + b
+sum = t1
+t2 = sum > 10
+ifFalse t2 goto L1
 print sum
+goto L2
+L1:
+print a
+L2:
 ```
 
 | Phase | Screenshot |
