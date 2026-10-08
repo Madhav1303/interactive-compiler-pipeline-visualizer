@@ -117,9 +117,10 @@ function playbackPlay() {
 }
 
 function playbackPause() {
-  clearInterval(playback.timer);
+   clearInterval(playback.timer);
   playback.timer = null;
-  $("play-btn").textContent = "\u25B6 Play";
+  const btn = $("play-btn");
+  if (btn) btn.textContent = "\u25B6 Play";
 }
 
 function playbackTogglePlay() {
