@@ -3,7 +3,7 @@
 A browser-based tool that shows each phase of a compiler working on a program written in a small toy language. Write or load a program, click **Run Pipeline**, and inspect the output of every stage: lexical analysis, syntax analysis, semantic analysis, intermediate code generation, and optimization.
 
 **Course:** Compiler Design, Review II
-**Team:** Madhav, Kishlay Anand, Atharv
+**Team:** Madhav, Kishlay Anand, Atharv<br>
 **Live demo:** https://madhav1303.github.io/interactive-compiler-pipeline-visualizer/<br>
 
 ![App overview](screenshots/overview.png)
