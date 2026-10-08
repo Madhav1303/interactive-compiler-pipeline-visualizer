@@ -173,5 +173,8 @@ HTML, CSS, JavaScript. No frameworks or dependencies.
 - The parser stops at the first syntax error
 
 ## Future Work
-
-- (e.g. target code generation, more optimizations)
+- Short-circuit evaluation for `&&` and `||` (currently both sides are always evaluated)
+- Explicit int-to-float conversion in the three-address code
+- Constant propagation through variables (e.g. folding `total / count` when both values are known)
+- Merging `t2 = sum + i; sum = t2` into `sum = sum + i`
+- Target code generation
