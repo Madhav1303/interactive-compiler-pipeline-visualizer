@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Interactive Compiler Pipeline Visualizer</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <h1>Interactive Compiler Pipeline Visualizer</h1>
+  <span class="sub">Compiler Design · Review II demo — Madhav · Kishlay Anand · Atharv</span>
+</header>
+
+<main>
+  <div class="controls">
+    <div class="col">
+      <label for="source">Toy language source code</label>
+      <textarea id="source" spellcheck="false"></textarea>
+    </div>
+    <div class="side-controls">
+      <div>
+        <label for="sample-select">Load sample program</label>
+        <select id="sample-select">
+          <option value="">— choose a sample —</option>
+          <option value="sum_compare">Sum &amp; compare (if/else)</option>
+          <option value="while_countdown">While loop countdown</option>
+          <option value="for_loop">For loop</option>
+          <option value="logical_ops">Logical operators (&amp;&amp; / ||)</option>
+          <option value="constant_fold">Constant folding demo</option>
+          <option value="float_mix">int/float mixing</option>
+          <option value="semantic_error">Semantic error: undeclared var</option>
+          <option value="syntax_error">Syntax error: missing ';'</option>
+        </select>
+      </div>
+      <button id="run-btn">&#9654; Run Pipeline</button>
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab-btn" data-tab="overview">Overview</button>
+    <button class="tab-btn active" data-tab="tokens">1. Lexical Analysis <span id="badge-tokens"></span></button>
+    <button class="tab-btn" data-tab="parse">2. Syntax Analysis <span id="badge-parse"></span></button>
+    <button class="tab-btn" data-tab="semantic">3. Semantic Analysis <span id="badge-semantic"></span></button>
+    <button class="tab-btn" data-tab="ir">4. Intermediate Code &amp; Optimization</button>
+  </nav>
+
+  <section id="panel-overview" class="tab-panel"></section>
+  <section id="panel-tokens" class="tab-panel active"></section>
+  <section id="panel-parse" class="tab-panel"></section>
+  <section id="panel-semantic" class="tab-panel"></section>
+  <section id="panel-ir" class="tab-panel"></section>
+</main>
+
+<footer>Interactive Compiler Pipeline Visualizer — Compiler Design Project</footer>
+
+<script src="js/lexer.js"></script>
+<script src="js/parser.js"></script>
+<script src="js/semantic.js"></script>
+<script src="js/ir.js"></script>
+<script src="js/optimizer.js"></script>
+<script src="js/visualizer.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

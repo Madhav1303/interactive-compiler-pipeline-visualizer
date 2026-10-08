@@ -1,0 +1,199 @@
+:root {
+  --navy: #0B2545;
+  --teal: #1C7293;
+  --ice: #EAF1F8;
+  --amber: #FFB100;
+  --ink: #16212E;
+  --mute: #5B6B7C;
+  --border: #D8E3EE;
+  --red: #A6472F;
+  --green: #1C7293;
+  /* Tell the browser this page is explicitly light-themed, so a
+     system/browser dark-mode override doesn't silently recolor
+     form controls (this was the cause of the "invisible text"
+     bug in the textarea). */
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Calibri, "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  background: #F7FAFD;
+}
+
+header {
+  background: var(--navy);
+  color: #fff;
+  padding: 1.1rem 1.6rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+header h1 { font-size: 1.25rem; margin: 0; font-family: Cambria, Georgia, serif; }
+header .sub { color: #AFC6DE; font-size: 0.85rem; }
+
+main { padding: 1.4rem 1.6rem 2.5rem; max-width: 1300px; margin: 0 auto; }
+
+.controls {
+  display: flex; gap: 0.8rem; align-items: flex-start; flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.controls .col { flex: 1; min-width: 320px; }
+.controls label { display: block; font-size: 0.8rem; font-weight: bold; color: var(--teal); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.04em; }
+
+textarea#source {
+  width: 100%; min-height: 160px; font-family: "Courier New", monospace; font-size: 14px;
+  padding: 0.7rem; border: 1px solid var(--border); border-radius: 8px; resize: vertical;
+  background: #ffffff;
+  /* Explicit text color fixes the "typing is invisible" bug: without
+     this, some browsers apply a dark-mode default text color while
+     still honoring our explicit white background, making typed text
+     unreadable. Setting color (and the WebKit fill fallback) forces
+     it to always render dark-on-white regardless of OS/browser theme. */
+  color: var(--ink);
+  caret-color: var(--ink);
+  -webkit-text-fill-color: var(--ink);
+}
+textarea#source::placeholder { color: var(--mute); opacity: 1; }
+
+select, button {
+  font-family: inherit; font-size: 0.9rem; padding: 0.5rem 0.8rem; border-radius: 6px;
+  border: 1px solid var(--border); background: #fff; color: var(--ink); cursor: pointer;
+}
+button#run-btn {
+  background: var(--amber); border: none; font-weight: bold; color: var(--navy);
+  padding: 0.6rem 1.4rem; font-size: 1rem;
+}
+button#run-btn:hover { filter: brightness(0.95); }
+
+.small-btn {
+  background: var(--ice); border: 1px solid var(--border); color: var(--navy);
+  font-size: 0.78rem; padding: 0.3rem 0.65rem; border-radius: 6px; margin-right: 0.4rem; margin-top: 0.5rem;
+}
+.small-btn:hover { background: #DCE8F4; }
+
+.side-controls { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.tabs { display: flex; gap: 0.4rem; border-bottom: 2px solid var(--border); margin-bottom: 1rem; flex-wrap: wrap; }
+.tab-btn {
+  background: none; border: none; padding: 0.6rem 1rem; font-size: 0.95rem;
+  color: var(--mute); border-bottom: 3px solid transparent; border-radius: 0;
+  display: flex; align-items: center; gap: 0.35rem;
+}
+.tab-btn.active { color: var(--navy); border-bottom-color: var(--amber); font-weight: bold; }
+
+.badge {
+  background: var(--teal); color: #fff; font-size: 0.7rem; padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+}
+.badge-err { background: var(--red); }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.2rem; align-items: start; }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+
+h3 { font-family: Cambria, Georgia, serif; color: var(--navy); font-size: 1.02rem; margin: 0 0 0.5rem; }
+
+.data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.data-table th, .data-table td { padding: 0.45rem 0.6rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.86rem; }
+.data-table th { background: var(--ice); color: var(--navy); }
+.data-table.small td, .data-table.small th { font-size: 0.78rem; padding: 0.32rem 0.5rem; }
+
+.tag { background: var(--ice); color: var(--teal); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.78rem; font-weight: bold; }
+.state { color: var(--teal); font-weight: bold; font-family: "Courier New", monospace; }
+.muted { color: var(--mute); }
+
+.empty { color: var(--mute); font-style: italic; }
+.ok-msg { color: var(--teal); font-weight: bold; }
+
+.error-list { list-style: none; margin: 0; padding: 0; }
+.error-row {
+  background: #FBEAE5; color: var(--red); border: 1px solid #E8C2B4; border-radius: 6px;
+  padding: 0.45rem 0.7rem; margin-bottom: 0.4rem; font-size: 0.86rem;
+}
+
+/* ---- parse tree (CSS-only tree) ---- */
+.tree-wrap { overflow-x: auto; padding: 0.4rem 0; }
+ul.ast-root, ul.ast-children { list-style: none; margin: 0; padding-left: 1.4rem; position: relative; }
+ul.ast-root { padding-left: 0; }
+ul.ast-children { border-left: 1px dashed var(--border); }
+ul.ast-children > li { position: relative; padding: 0.15rem 0 0.15rem 0.9rem; }
+ul.ast-children > li::before {
+  content: ""; position: absolute; left: 0; top: 0.9rem; width: 0.8rem; height: 1px;
+  background: var(--border);
+}
+.ast-node {
+  display: inline-block; background: var(--navy); color: #fff; padding: 0.22rem 0.6rem;
+  border-radius: 6px; font-size: 0.8rem; font-family: "Courier New", monospace;
+}
+.edge-label { display: block; font-size: 0.68rem; color: var(--mute); margin-bottom: 0.1rem; font-style: italic; }
+
+/* ---- parsing trace ---- */
+.trace-list { max-height: 420px; overflow-y: auto; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem 0.7rem; font-size: 0.78rem; font-family: "Courier New", monospace; }
+.trace-row { padding: 0.12rem 0; }
+.trace-enter { color: var(--teal); }
+.trace-exit { color: var(--mute); }
+
+/* ---- symbol table scopes ---- */
+.scope-block { margin-bottom: 0.9rem; }
+.scope-block h4 { margin: 0 0 0.3rem; font-size: 0.85rem; color: var(--navy); }
+
+/* ---- TAC ---- */
+.tac-block { background: var(--navy); border-radius: 8px; padding: 0.8rem 1rem; font-family: "Courier New", monospace; font-size: 0.86rem; color: #E8F0F8; max-height: 420px; overflow-y: auto; }
+.tac-block.tac-optimized { background: #0E3A2E; }
+.tac-line { padding: 0.1rem 0; }
+.tac-idx { display: inline-block; width: 1.8rem; color: #6E86A6; }
+.tac-label { color: var(--amber); font-weight: bold; }
+
+/* ---- optimizer stats ---- */
+.opt-stats { display: flex; gap: 0.6rem; margin-bottom: 0.7rem; flex-wrap: wrap; }
+.opt-stat {
+  flex: 1; min-width: 110px; background: var(--ice); border-radius: 8px; padding: 0.5rem 0.7rem;
+  display: flex; flex-direction: column; font-size: 0.72rem; color: var(--mute);
+}
+.opt-stat .opt-num { font-family: Cambria, Georgia, serif; font-size: 1.4rem; color: var(--navy); font-weight: bold; }
+.opt-stat.opt-highlight { background: var(--amber); }
+.opt-stat.opt-highlight .opt-num { color: var(--navy); }
+.opt-stat.opt-highlight span:last-child { color: #4a3a00; }
+
+/* ---- basic blocks ---- */
+.block-grid { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.basic-block { background: #fff; border: 1px solid var(--border); border-radius: 8px; min-width: 190px; flex: 1; overflow: hidden; }
+.basic-block-head { background: var(--teal); color: #fff; font-size: 0.8rem; font-weight: bold; padding: 0.35rem 0.6rem; }
+.basic-block-body { padding: 0.5rem 0.6rem; font-family: "Courier New", monospace; font-size: 0.74rem; color: var(--ink); }
+
+/* ---- overview tab ---- */
+.overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1.2rem; }
+@media (max-width: 800px) { .overview-grid { grid-template-columns: repeat(2, 1fr); } }
+.overview-card { border-radius: 10px; padding: 0.9rem; text-align: center; border: 1px solid var(--border); background: #fff; }
+.overview-card.ok { border-color: #BFE0DD; background: #F1FAF8; }
+.overview-card.fail { border-color: #EFC9BB; background: #FDF1EC; }
+.overview-status { font-size: 1.5rem; font-weight: bold; }
+.overview-card.ok .overview-status { color: var(--teal); }
+.overview-card.fail .overview-status { color: var(--red); }
+.overview-name { font-weight: bold; font-size: 0.85rem; color: var(--navy); margin-top: 0.2rem; }
+.overview-detail { font-size: 0.78rem; color: var(--mute); }
+.overview-summary { background: var(--ice); border-radius: 10px; padding: 1rem 1.2rem; }
+.overview-summary p { font-size: 0.88rem; margin: 0.3rem 0; }
+
+/* ---- lexer playback ---- */
+.playback-bar { display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+.speed-label { font-size: 0.75rem; color: var(--mute); display: flex; align-items: center; gap: 0.3rem; margin-top: 0.5rem; }
+#playback-counter { margin-left: 0.3rem; font-size: 0.8rem; margin-top: 0.5rem; }
+
+.src-view {
+  background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.8rem;
+  font-family: "Courier New", monospace; font-size: 0.86rem; white-space: pre-wrap; word-break: break-word;
+  max-height: 180px; overflow-y: auto; margin: 0 0 0.3rem;
+}
+.src-char { padding: 0 0.02rem; border-radius: 2px; }
+.src-char-current { background: var(--amber); color: var(--navy); font-weight: bold; }
+.trace-row-current { background: #FFF3D6 !important; }
+#dfa-trace-table tbody tr:nth-child(odd) { background: #fafcfe; }
+
+footer { text-align: center; color: var(--mute); font-size: 0.78rem; padding: 1rem; }
